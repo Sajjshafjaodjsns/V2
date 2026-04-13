@@ -1,10 +1,9 @@
+package com.autoloader.scania.ui
 import android.view.View
 import android.widget.TextView
-package com.autoloader.scania.ui
 import androidx.appcompat.R as AppCompatR
 
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
