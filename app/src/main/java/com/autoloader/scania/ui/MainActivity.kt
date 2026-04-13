@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         repeat(8) { i ->
             val label = TextView(this).apply {
                 text = "Авто ${i + 1}"
-                setTextAppearance(R.style.TextAppearance_AppCompat_Caption)
+                setTextAppearance(R.style.TextAppearance_MaterialComponents_Body2)
                 setPadding(4, if (i == 0) 0 else 20, 4, 2)
             }
             val field = EditText(this).apply {
