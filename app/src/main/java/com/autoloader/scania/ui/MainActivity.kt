@@ -1,3 +1,5 @@
+import android.view.View
+import android.widget.TextView
 package com.autoloader.scania.ui
 import androidx.appcompat.R as AppCompatR
 
