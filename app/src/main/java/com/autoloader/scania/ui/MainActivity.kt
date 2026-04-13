@@ -1,4 +1,5 @@
 package com.autoloader.scania.ui
+import androidx.appcompat.R as AppCompatR
 
 import android.os.Bundle
 import android.view.View

@@ -1,3 +1,4 @@
+import android.view.View
 package com.autoloader.scania.ui
 
 import android.content.Context
