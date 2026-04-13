@@ -1,0 +1,22 @@
+ВАЖНО: файл gradle-wrapper.jar отсутствует в этом архиве
+(бинарные файлы не передаются в текстовом виде).
+
+Как получить его (выберите один способ):
+
+СПОСОБ 1 — через Android Studio (рекомендуется):
+  1. Откройте проект в Android Studio
+  2. Меню: Tools → Gradle → Generate Wrapper
+  3. Файл появится автоматически в gradle/wrapper/
+
+СПОСОБ 2 — через командную строку (если установлен Gradle):
+  cd AutoLoaderApp
+  gradle wrapper --gradle-version 8.4
+
+СПОСОБ 3 — скачать вручную:
+  URL: https://github.com/gradle/gradle/raw/v8.4.0/gradle/wrapper/gradle-wrapper.jar
+  Сохранить как: gradle/wrapper/gradle-wrapper.jar
+
+После этого закоммитьте jar в репозиторий:
+  git add gradle/wrapper/gradle-wrapper.jar
+  git commit -m "Add gradle wrapper jar"
+  git push

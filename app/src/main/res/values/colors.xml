@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Фон -->
+    <color name="background">#F0F2F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#E8EAED</color>
+
+    <!-- Акцент -->
+    <color name="accent">#1B5E20</color>
+    <color name="on_accent">#FFFFFF</color>
+
+    <!-- Текст -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#555555</color>
+    <color name="text_hint">#888888</color>
+    <color name="text_slot_number">#FFFFFF</color>
+    <color name="text_info">#0D47A1</color>
+    <color name="text_warning">#7B4600</color>
+
+    <!-- Статусы -->
+    <color name="status_ok">#1B5E20</color>
+    <color name="status_warning">#E65100</color>
+    <color name="status_error">#B71C1C</color>
+
+    <!-- Фоны карточек -->
+    <color name="card_ok_bg">#F1F8F2</color>
+    <color name="card_ok_border">#A5D6A7</color>
+    <color name="card_warning_bg">#FFF8F0</color>
+    <color name="card_warning_border">#FFCC80</color>
+    <color name="card_error_bg">#FFF0F0</color>
+    <color name="card_error_border">#EF9A9A</color>
+    <color name="card_neutral_bg">#FAFAFA</color>
+    <color name="card_neutral_border">#E0E0E0</color>
+    <color name="info_bg">#E8F0FE</color>
+    <color name="info_border">#90CAF9</color>
+    <color name="warning_bg">#FFF3E0</color>
+    <color name="warning_border">#FFCC80</color>
+    <color name="slot_badge_bg">#1B5E20</color>
+
+    <!-- Иконка приложения -->
+    <color name="ic_launcher_background">#1B5E20</color>
+</resources>

@@ -1,0 +1,73 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ФАЙЛ: .github/workflows/build_debug.yml
+# НАЗНАЧЕНИЕ: Собирает debug APK при каждом push в main/master.
+#             APK прикрепляется к workflow run как artifact — скачать можно
+#             на вкладке Actions → выбрать run → раздел Artifacts.
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: Build Debug APK
+
+# ── Когда запускается ─────────────────────────────────────────────────────────
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  # Позволяет запустить вручную: Actions → Build Debug APK → Run workflow
+  workflow_dispatch:
+
+# ── Задания ───────────────────────────────────────────────────────────────────
+jobs:
+  build:
+    name: Build Debug APK
+    # Ubuntu последней стабильной версии — бесплатен для публичных репо
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Получаем код репозитория
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем JDK 17 (требуется для AGP 8.x)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'   # Eclipse Temurin — самый популярный дистрибутив
+          cache: 'gradle'           # кэширует ~/.gradle между запусками → быстрее
+
+      # 3. Настраиваем Gradle (скачивает wrapper если нужно, управляет кэшем)
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: wrapper    # использует версию из gradle-wrapper.properties
+
+      # 4. Даём права на запуск gradlew
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # 5. Собираем debug APK
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace --no-daemon
+        env:
+          # Отключаем daemon в CI — экономит память
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+
+      # 6. Прикрепляем APK к результатам запуска
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AutoLoaderScania-debug-${{ github.run_number }}
+          path: app/build/outputs/apk/debug/*.apk
+          # Хранить 30 дней (потом удаляется автоматически)
+          retention-days: 30
+
+      # 7. Выводим информацию о собранном APK
+      - name: Show APK info
+        run: |
+          echo "=== Собранные файлы ==="
+          find app/build/outputs/apk -name "*.apk" -exec ls -lh {} \;

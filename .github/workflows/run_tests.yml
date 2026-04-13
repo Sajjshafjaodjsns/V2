@@ -1,0 +1,68 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ФАЙЛ: .github/workflows/run_tests.yml
+# НАЗНАЧЕНИЕ: Запускает unit-тесты при каждом pull request.
+#             Блокирует merge если тесты упали.
+#             Результаты видны в разделе PR → Checks.
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: Run Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: wrapper
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # Запускаем только unit-тесты (не instrumented)
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest --no-daemon
+        env:
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+      # Публикуем отчёт о тестах в интерфейсе GitHub
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()   # запускаем даже если тесты упали
+        with:
+          name: Unit Test Results
+          path: app/build/test-results/testDebugUnitTest/*.xml
+          reporter: java-junit
+          fail-on-error: true
+
+      # Сохраняем HTML-отчёт как artifact
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report
+          path: app/build/reports/tests/testDebugUnitTest/
+          retention-days: 14

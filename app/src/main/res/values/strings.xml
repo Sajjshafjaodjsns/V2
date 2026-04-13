@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Автовоз Scania 4×4</string>
+    <string name="toolbar_title">Автовоз Scania 4×4</string>
+    <string name="toolbar_subtitle">Установка Uçsuoğlu (2008)</string>
+    <string name="btn_calculate">Рассчитать</string>
+    <string name="btn_reset">Сброс</string>
+    <string name="hint_car_input">Марка Модель Год (напр. Toyota Camry 2020)</string>
+    <string name="info_4x4">Шасси 4×4: рама выше стандарта на 250 мм. Слот над кабиной (3) — макс. высота авто 1 450 мм. Общий габарит: 4 000 мм.</string>
+</resources>
