@@ -17,6 +17,7 @@ ext {
 
 android {
     namespace "com.autoloader.scania"
+    namespace "com.autoloader.scania"
     namespace 'com.autoloader.scania'
     compileSdk 34
 
